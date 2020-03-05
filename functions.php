@@ -60,13 +60,13 @@ if ( ! function_exists( 'natural_lite_setup' ) ) :
 			),
 		));
 		$defaults = array(
-			'width'                 => 1600,
-			'height'                => 480,
-			'default-image'			=> get_template_directory_uri() . '/images/default-header.jpg',
-			'flex-height'           => true,
-			'flex-width'            => true,
-			'header-text'           => false,
-			'uploads'               => true,
+			'width'         => 1600,
+			'height'        => 480,
+			'default-image' => get_template_directory_uri() . '/images/default-header.jpg',
+			'flex-height'   => true,
+			'flex-width'    => true,
+			'header-text'   => false,
+			'uploads'       => true,
 		);
 		add_theme_support( 'custom-header', $defaults );
 
@@ -74,11 +74,11 @@ if ( ! function_exists( 'natural_lite_setup' ) ) :
 		* Enable support for custom background.
 		*/
 		$defaults = array(
-		'default-color'			=> '827768',
-		'default-image'         => get_template_directory_uri() . '/images/default-pattern.png',
-		'wp-head-callback'      => '_custom_background_cb',
-		'admin-head-callback'   => '',
-		'admin-preview-callback' => '',
+			'default-color'          => '827768',
+			'default-image'          => get_template_directory_uri() . '/images/default-pattern.png',
+			'wp-head-callback'       => '_custom_background_cb',
+			'admin-head-callback'    => '',
+			'admin-preview-callback' => '',
 		);
 		add_theme_support( 'custom-background', $defaults );
 
@@ -91,97 +91,6 @@ if ( ! function_exists( 'natural_lite_setup' ) ) :
 			'comment-list',
 			'gallery',
 			'caption',
-		) );
-
-		/*
-		* Enable support for starter content.
-		*/
-		add_theme_support( 'starter-content', array(
-
-			// Starter theme options.
-			'theme_mods' => array(
-				'natural_lite_page_left' => '{{about}}',
-				'natural_lite_page_mid' => '{{services}}',
-				'natural_lite_page_right' => '{{contact}}',
-			),
-
-			// Static front page set to Home, posts page set to Blog.
-			'options' => array(
-				'custom_logo' => '{{logo}}',
-				'show_on_front' => 'page',
-				'page_on_front' => '{{home}}',
-				'page_for_posts' => '{{blog}}',
-				'blogdescription' => __( 'My Awesome <b>Organic Themes</b><br /> Website', 'natural-lite' ),
-			),
-
-			// Starter pages to include.
-			'posts' => array(
-				'home' => array(
-					'template' => 'template-home.php',
-				),
-				'about' => array(
-					'thumbnail' => '{{image-about}}',
-				),
-				'services' => array(
-					'post_type' => 'page',
-					'post_title' => __( 'Services', 'natural-lite' ),
-					'post_content' => __( '<p>This is an example services page. You may want to write about the various services your business provides.</p>', 'natural-lite' ),
-					'thumbnail' => '{{image-services}}',
-				),
-				'blog',
-				'contact' => array(
-					'thumbnail' => '{{image-contact}}',
-				),
-			),
-
-			// Starter attachments for default images.
-			'attachments' => array(
-				'logo' => array(
-					'post_title' => __( 'Logo', 'natural-lite' ),
-					'file' => 'images/logo.png',
-				),
-				'image-about' => array(
-					'post_title' => __( 'About Image', 'natural-lite' ),
-					'file' => 'images/image-about.jpg',
-				),
-				'image-services' => array(
-					'post_title' => __( 'Services Image', 'natural-lite' ),
-					'file' => 'images/image-services.jpg',
-				),
-				'image-contact' => array(
-					'post_title' => __( 'Contact Image', 'natural-lite' ),
-					'file' => 'images/image-contact.jpg',
-				),
-			),
-
-			// Add pages to primary navigation menu.
-			'nav_menus' => array(
-				'header-menu' => array(
-					'name' => __( 'Primary Navigation', 'natural-lite' ),
-					'items' => array(
-						'page_home',
-						'page_about',
-						'page_services' => array(
-							'type' => 'post_type',
-							'object' => 'page',
-							'object_id' => '{{services}}',
-						),
-						'page_blog',
-						'page_contact',
-					),
-				)
-			),
-
-			// Add test widgets to footer.
-			'widgets' => array(
-				'footer' => array(
-					'text_business_info',
-					'meta',
-					'recent-posts',
-					'text_about',
-				)
-			)
-
 		) );
 
 	}
@@ -283,18 +192,18 @@ function natural_lite_admin_notice_follow() {
 	<?php
 }
 
-/** Function natural_lite_admin_notice_review */
-function natural_lite_admin_notice_review() {
-	if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-review-30' ) ) {
+/** Function natural_lite_admin_notice_sale */
+function natural_lite_admin_notice_sale() {
+	if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-sale-forever' ) ) {
 		return;
 	}
 	?>
 
-	<div data-dismissible="notice-natural-lite-review-30" class="notice updated is-dismissible">
+	<div data-dismissible="notice-natural-lite-sale-forever" class="notice updated is-dismissible">
 
-		<p><?php printf( wp_kses_post( '🍍 Aloha! Mahalo for using the <a href="%1$s" target="_blank">Natural Lite</a> theme. As a <b>BIG</b> favor, could you please take a moment to <a href="%2$s" target="_blank">leave a positive review</a> for this theme. It takes a great deal of time to build and maintain a free product such as this, and your support is greatly appreciated.', 'natural-lite' ), 'https://organicthemes.com/theme/natural-lite/', 'https://wordpress.org/support/theme/natural-lite/reviews/#new-post' ); ?></p>
-		<p><b><?php esc_html_e( '&mdash; David Morgan', 'natural-lite' ); ?></b><br/>
-		<b><?php printf( wp_kses_post( 'Co-founder of <a href="%1$s" target="_blank">Organic Themes</a>', 'natural-lite' ), 'https://organicthemes.com/' ); ?></b></p>
+		<h2 style="margin-bottom:0px;"><?php esc_html_e( '🎄 Save BIG on all WordPress products and services this holiday season! 🎄', 'natural-lite' ); ?></h2>
+		<p><?php printf( wp_kses_post( 'Take advantage of this opportunity to <a href="%1$s" target="_blank">upgrade your theme</a> or purchase <a href="%2$s" target="_blank">Builder Widgets Pro</a>, the popular WordPress page builder plugin, at a discounted price!', 'natural-lite' ), 'https://organicthemes.com/theme/natural-theme/', 'https://organicthemes.com/builder/' ); ?></p>
+		<p><a class="button button-primary" href="https://organicthemes.com/pricing/" target="_blank"><?php esc_html_e( 'Start Saving', 'natural-lite' ); ?></a></p>
 
 	</div>
 
@@ -303,7 +212,7 @@ function natural_lite_admin_notice_review() {
 
 add_action( 'admin_init', array( 'PAnD', 'init' ) );
 add_action( 'admin_notices', 'natural_lite_admin_notice_follow', 10 );
-add_action( 'admin_notices', 'natural_lite_admin_notice_review', 10 );
+add_action( 'admin_notices', 'natural_lite_admin_notice_sale', 10 );
 
 require( get_template_directory() . '/includes/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php' );
 
