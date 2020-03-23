@@ -1,6 +1,6 @@
 === Natural Lite ===
 
-Version: 1.4.8
+Version: 1.5
 Contributors: organicthemes, itsdavidmorgan
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-background, custom-header, custom-menu, featured-images, featured-image-header, flexible-header, full-width-template, theme-options, translation-ready, sticky-post, footer-widgets, blog, news
 Requires at least: 4.8
@@ -230,3 +230,8 @@ CHANGELOG v1.4.7
 CHANGELOG v1.4.8
 - Updated Gutenberg editor styles
 - Removed starter content
+
+CHANGELOG v1.5
+- Updated Gutenberg editor styles
+- Updated Gutenberg block styles
+- Enqueued Google fonts in block editor

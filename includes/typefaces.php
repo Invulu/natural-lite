@@ -20,14 +20,14 @@ function natural_lite_fonts_url() {
 	* into your own language.
 	*/
 
-	$raleway = _x( 'on', 'Raleway font: on or off', 'natural-lite' );
-	$roboto = _x( 'on', 'Roboto font: on or off', 'natural-lite' );
+	$raleway     = _x( 'on', 'Raleway font: on or off', 'natural-lite' );
+	$roboto      = _x( 'on', 'Roboto font: on or off', 'natural-lite' );
 	$roboto_slab = _x( 'on', 'Roboto Slab font: on or off', 'natural-lite' );
-	$open_sans = _x( 'on', 'Open Sans font: on or off', 'natural-lite' );
-	$montserrat = _x( 'on', 'Montserrat font: on or off', 'natural-lite' );
+	$open_sans   = _x( 'on', 'Open Sans font: on or off', 'natural-lite' );
+	$montserrat  = _x( 'on', 'Montserrat font: on or off', 'natural-lite' );
 	$droid_serif = _x( 'on', 'Droid Serif font: on or off', 'natural-lite' );
-	$cabin = _x( 'on', 'Cabin font: on or off', 'natural-lite' );
-	$lato = _x( 'on', 'Lato font: on or off', 'natural-lite' );
+	$cabin       = _x( 'on', 'Cabin font: on or off', 'natural-lite' );
+	$lato        = _x( 'on', 'Lato font: on or off', 'natural-lite' );
 
 	if ( 'off' !== $raleway || 'off' !== $roboto || 'off' !== $roboto_slab || 'off' !== $open_sans || 'off' !== $montserrat || 'off' !== $droid_serif || 'off' !== $cabin || 'off' !== $lato ) {
 
@@ -82,7 +82,7 @@ function natural_lite_fonts_url() {
  * @since Organic Natural Lite 1.0
  */
 function natural_lite_scripts_styles() {
-	wp_enqueue_style( 'natural-lite-fonts', natural_lite_fonts_url(), array(), null );
+	wp_enqueue_style( 'natural-lite-fonts', natural_lite_fonts_url(), array(), '1.0' );
 }
 add_action( 'wp_enqueue_scripts', 'natural_lite_scripts_styles' );
 
@@ -95,3 +95,16 @@ function natural_lite_editor_styles() {
 	add_editor_style( array( 'style.css', natural_lite_fonts_url() ) );
 }
 add_action( 'after_setup_theme', 'natural_lite_editor_styles' );
+
+if ( ! function_exists( 'natural_lite_block_editor_styles' ) ) {
+
+	/**
+	 * Add Google Scripts for use with the block editor
+	 *
+	 * @since Natural Lite 1.0
+	 */
+	function natural_lite_block_editor_styles() {
+		wp_enqueue_style( 'natural-lite-fonts', natural_lite_fonts_url(), array(), '1.0' );
+	}
+}
+add_action( 'enqueue_block_editor_assets', 'natural_lite_block_editor_styles' );
