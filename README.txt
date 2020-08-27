@@ -1,10 +1,9 @@
 === Natural Lite ===
 
-Version: 1.5
+Version: 1.6
 Contributors: organicthemes, itsdavidmorgan
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-background, custom-header, custom-menu, featured-images, featured-image-header, flexible-header, full-width-template, theme-options, translation-ready, sticky-post, footer-widgets, blog, news
 Requires at least: 4.8
-Tested up to: 5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,12 +37,6 @@ Natural Lite is distributed under the terms of the GNU GPL
 - logo.png: Created by David Morgan, http://dav.idmorgan.com. Licensed under the GPLv2 license.
 - logo.psd: Created by David Morgan, http://dav.idmorgan.com. Licensed under the GPLv2 license.
 - screenshot.png: Created by David Morgan, http://dav.idmorgan.com. Licensed under the GPLv2 license.
-- default-header.jpg: Downloaded from Unsplash, https://unsplash.com. Licensed under Creative Commons Zero license, https://unsplash.com/license.
-- default-image.jpg: Downloaded from Unsplash, https://unsplash.com. Licensed under Creative Commons Zero license, https://unsplash.com/license.
-- image-services.jpg: Downloaded from Unsplash, https://unsplash.com. Licensed under Creative Commons Zero license, https://unsplash.com/license.
-- image-about.jpg: Downloaded from Unsplash, https://unsplash.com. Licensed under Creative Commons Zero license, https://unsplash.com/license.
-- image-contact.jpg: Downloaded from Unsplash, https://unsplash.com. Licensed under Creative Commons Zero license, https://unsplash.com/license.
-- default-pattern.png: Downloaded from Subtle Patterns, http://subtlepatterns.com. Licensed under the CC BY-SA 3.0 license.
 
 == Font Awesome ==
 
@@ -235,3 +228,12 @@ CHANGELOG v1.5
 - Updated Gutenberg editor styles
 - Updated Gutenberg block styles
 - Enqueued Google fonts in block editor
+
+CHANGELOG v1.6:
+- Updated Gutenberg styles
+- Added new stylesheet tags
+- Added missing escaping where needed
+- Added dismissible admin notice for theme docs
+- Updated recommended plugins
+- Added wp_body_open tag to header
+- General cleanup

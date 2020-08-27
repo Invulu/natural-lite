@@ -28,6 +28,8 @@
 
 <body <?php body_class(); ?>>
 
+<?php wp_body_open(); ?>
+
 <!-- BEGIN #wrap -->
 <div id="wrap">
 
@@ -55,14 +57,14 @@
 										<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo wp_kses_post( get_bloginfo( 'name' ) ); ?></a>
 									</h1>
 									<h2 class="site-description">
-										<?php echo html_entity_decode( get_bloginfo( 'description' ) ); ?>
+										<?php echo wp_kses_post( get_bloginfo( 'description' ) ); ?>
 									</h2>
 								<?php } else { ?>
 									<p class="site-title">
 										<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo wp_kses_post( get_bloginfo( 'name' ) ); ?></a>
 									</p>
 									<p class="site-description">
-										<?php echo html_entity_decode( get_bloginfo( 'description' ) ); ?>
+										<?php echo wp_kses_post( get_bloginfo( 'description' ) ); ?>
 									</p>
 								<?php } ?>
 
@@ -85,14 +87,14 @@
 									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo wp_kses_post( get_bloginfo( 'name' ) ); ?></a>
 								</h1>
 								<h2 class="site-description">
-									<?php echo html_entity_decode( get_bloginfo( 'description' ) ); ?>
+									<?php echo wp_kses_post( get_bloginfo( 'description' ) ); ?>
 								</h2>
 							<?php } else { ?>
 								<p class="site-title">
 									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php echo wp_kses_post( get_bloginfo( 'name' ) ); ?></a>
 								</p>
 								<p class="site-description">
-									<?php echo html_entity_decode( get_bloginfo( 'description' ) ); ?>
+									<?php echo wp_kses_post( get_bloginfo( 'description' ) ); ?>
 								</p>
 							<?php } ?>
 

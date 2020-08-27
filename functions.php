@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file includes the theme functions.
+ *
+ * @package Natural Lite
+ * @since Natural Lite 1.0
+ */
 
 /*
 -----------------------------------------------------------------------------------------------------
@@ -106,14 +112,14 @@ add_action( 'after_setup_theme', 'natural_lite_setup' );
 
 function natural_lite_support_link() {
 	global $submenu;
-	$menu_link = esc_url( 'https://organicthemes.com/support/' );
+	$menu_link               = esc_url( 'https://organicthemes.com/support/' );
 	$submenu['themes.php'][] = array( __( 'Theme Support', 'natural-lite' ), 'manage_options', $menu_link, '', 1 );
 }
 add_action( 'admin_menu', 'natural_lite_support_link' );
 
 function natural_lite_upgrade_link() {
 	global $submenu;
-	$upgrade_link = esc_url( 'https://organicthemes.com/theme/natural-theme/?utm_source=lite_upgrade' );
+	$upgrade_link            = esc_url( 'https://organicthemes.com/theme/natural-theme/?utm_source=lite_upgrade' );
 	$submenu['themes.php'][] = array( __( 'Theme Upgrade', 'natural-lite' ), 'manage_options', $upgrade_link );
 }
 add_action( 'admin_menu', 'natural_lite_upgrade_link' );
@@ -192,29 +198,30 @@ function natural_lite_admin_notice_follow() {
 	<?php
 }
 
-/** Function natural_lite_admin_notice_sale */
-function natural_lite_admin_notice_sale() {
-	if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-sale-forever' ) ) {
-		return;
+if ( ! function_exists( 'natural_lite_admin_notice_help' ) ) {
+
+	/** Function natural_lite_admin_notice_help */
+	function natural_lite_admin_notice_help() {
+		if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-help' ) ) {
+			return;
+		}
+		?>
+
+		<div data-dismissible="notice-natural-lite-help" class="notice updated is-dismissible">
+
+			<p><?php printf( wp_kses_post( 'Thanks for choosing an <b>Organic Theme</b>! View our <a href="%1$s" target="_blank">Theme Documentation</a> and <a href="%2$s" target="_blank">Support Forums</a> for help getting started.', 'natural-lite' ), 'https://organicthemes.com/documentation/', 'https://organicthemes.com/forums/forum/theme-support/' ); ?></p>
+
+		</div>
+
+		<?php
 	}
-	?>
-
-	<div data-dismissible="notice-natural-lite-sale-forever" class="notice updated is-dismissible">
-
-		<h2 style="margin-bottom:0px;"><?php esc_html_e( '🎄 Save BIG on all WordPress products and services this holiday season! 🎄', 'natural-lite' ); ?></h2>
-		<p><?php printf( wp_kses_post( 'Take advantage of this opportunity to <a href="%1$s" target="_blank">upgrade your theme</a> or purchase <a href="%2$s" target="_blank">Builder Widgets Pro</a>, the popular WordPress page builder plugin, at a discounted price!', 'natural-lite' ), 'https://organicthemes.com/theme/natural-theme/', 'https://organicthemes.com/builder/' ); ?></p>
-		<p><a class="button button-primary" href="https://organicthemes.com/pricing/" target="_blank"><?php esc_html_e( 'Start Saving', 'natural-lite' ); ?></a></p>
-
-	</div>
-
-	<?php
 }
 
 add_action( 'admin_init', array( 'PAnD', 'init' ) );
 add_action( 'admin_notices', 'natural_lite_admin_notice_follow', 10 );
-add_action( 'admin_notices', 'natural_lite_admin_notice_sale', 10 );
+add_action( 'admin_notices', 'natural_lite_admin_notice_help', 10 );
 
-require( get_template_directory() . '/includes/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php' );
+require get_template_directory() . '/includes/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php';
 
 /*
 -------------------------------------------------------------------------------------------------------
@@ -222,11 +229,20 @@ Category ID to Name
 -------------------------------------------------------------------------------------------------------
 */
 
-function natural_lite_cat_id_to_name( $id ) {
-	$term = get_term( $id, 'category' );
-	if ( is_wp_error( $term ) ) {
-		return false; }
-	return $name = $term->name;
+if ( ! function_exists( 'natural_lite_cat_id_to_name' ) ) {
+
+	/**
+	 * Changes category IDs to names.
+	 *
+	 * @param array $id IDs for categories.
+	 * @return array
+	 */
+	function natural_lite_cat_id_to_name( $id ) {
+		$cat = get_category( $id );
+		if ( is_wp_error( $cat ) ) {
+			return false; }
+		return $cat->cat_name;
+	}
 }
 
 /*
@@ -255,19 +271,19 @@ if ( ! function_exists( 'natural_lite_enqueue_scripts' ) ) {
 	function natural_lite_enqueue_scripts() {
 
 		// Enqueue Styles.
-		wp_enqueue_style( 'natural-style', get_stylesheet_uri() );
+		wp_enqueue_style( 'natural-style', get_stylesheet_uri(), '', '1.0' );
 		wp_enqueue_style( 'natural-style-mobile', get_template_directory_uri() . '/css/style-mobile.css', array( 'natural-style' ), '1.0' );
 		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array( 'natural-style' ), '1.0' );
 
 		// Resgister Scripts.
-		wp_register_script( 'fitvids', get_template_directory_uri() . '/js/jquery.fitvids.js', array( 'jquery' ), '1.0' );
+		wp_register_script( 'jquery-fitvids', get_template_directory_uri() . '/js/jquery.fitvids.js', array( 'jquery' ), '1.0', true );
 
 		// Enqueue Scripts.
-		wp_enqueue_script( 'natural-custom', get_template_directory_uri() . '/js/jquery.custom.js', array( 'jquery', 'fitvids' ), '1.0', true );
+		wp_enqueue_script( 'natural-custom', get_template_directory_uri() . '/js/jquery.custom.js', array( 'jquery', 'jquery-fitvids' ), '1.0', true );
 
 		// Load Flexslider on front page and slideshow page template.
 		if ( is_page_template( 'template-home.php' ) ) {
-			wp_enqueue_script( 'flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '1.0' );
+			wp_enqueue_script( 'jquery-flexslider', get_template_directory_uri() . '/js/jquery.flexslider.js', array( 'jquery' ), '1.0', true );
 		}
 
 		// Load single scripts only on single pages.
@@ -325,31 +341,34 @@ Register Sidebars
 -------------------------------------------------------------------------------------------------------
 */
 
+/** Function natural_lite_widgets_init */
 function natural_lite_widgets_init() {
+
 	register_sidebar(array(
-		'name' => esc_html__( 'Default Sidebar', 'natural-lite' ),
-		'id' => 'sidebar-1',
+		'name'          => esc_html__( 'Default Sidebar', 'natural-lite' ),
+		'id'            => 'sidebar-1',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h6 class="widget-title">',
-		'after_title' => '</h6>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h6 class="widget-title">',
+		'after_title'   => '</h6>',
 	));
 	register_sidebar(array(
-		'name' => esc_html__( 'Left Sidebar', 'natural-lite' ),
-		'id' => 'left-sidebar',
+		'name'          => esc_html__( 'Left Sidebar', 'natural-lite' ),
+		'id'            => 'left-sidebar',
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-		'after_widget' => '</div>',
-		'before_title' => '<h6 class="widget-title">',
-		'after_title' => '</h6>',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h6 class="widget-title">',
+		'after_title'   => '</h6>',
 	));
 	register_sidebar(array(
-		'name' => esc_html__( 'Footer Widgets', 'natural-lite' ),
-		'id' => 'footer',
+		'name'          => esc_html__( 'Footer Widgets', 'natural-lite' ),
+		'id'            => 'footer',
 		'before_widget' => '<div id="%1$s" class="widget %2$s"><div class="footer-widget">',
-		'after_widget' => '</div></div>',
-		'before_title' => '<h6 class="widget-title">',
-		'after_title' => '</h6>',
+		'after_widget'  => '</div></div>',
+		'before_title'  => '<h6 class="widget-title">',
+		'after_title'   => '</h6>',
 	));
+
 }
 add_action( 'widgets_init', 'natural_lite_widgets_init' );
 
@@ -359,8 +378,9 @@ Content Width
 ----------------------------------------------------------------------------------------------------
 */
 
-if ( ! isset( $content_width ) )
+if ( ! isset( $content_width ) ) {
 	$content_width = 760;
+}
 
 /**
  * Adjust content_width value based on the presence of widgets
@@ -379,64 +399,77 @@ Comments Function
 -------------------------------------------------------------------------------------------------------
 */
 
-if ( ! function_exists( 'natural_lite_comment' ) ) :
+if ( ! function_exists( 'natural_lite_comment' ) ) {
+
+	/**
+	 * Setup our comments for the theme.
+	 *
+	 * @param array $comment IDs for categories.
+	 * @param array $args Comment arguments.
+	 * @param array $depth Level of replies.
+	 */
 	function natural_lite_comment( $comment, $args, $depth ) {
-		$GLOBALS['comment'] = $comment;
 		switch ( $comment->comment_type ) :
-			case 'pingback' :
-			case 'trackback' :
-		?>
+			case 'pingback':
+			case 'trackback':
+				?>
 		<li class="post pingback">
-		<p><?php esc_html_e( 'Pingback:', 'natural-lite' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( esc_html__( 'Edit', 'natural-lite' ), '<span class="edit-link">', '</span>' ); ?></p>
-	<?php
-		break;
-			default :
-		?>
-		<li <?php comment_class(); ?> id="<?php echo esc_attr( 'li-comment-' . get_comment_ID() ); ?>">
+			<p><?php esc_html_e( 'Pingback:', 'natural-lite' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( esc_html__( 'Edit', 'natural-lite' ), '<span class="edit-link">', '</span>' ); ?></p>
+				<?php
+				break;
+			default:
+				?>
+			<li <?php comment_class(); ?> id="<?php echo esc_attr( 'li-comment-' . get_comment_ID() ); ?>">
 
-		<article id="<?php echo esc_attr( 'comment-' . get_comment_ID() ); ?>" class="comment">
-			<footer class="comment-meta">
-				<div class="comment-author vcard">
-					<?php
-						$avatar_size = 72;
-					if ( '0' != $comment->comment_parent ) {
-						$avatar_size = 48; }
+				<article id="<?php echo esc_attr( 'comment-' . get_comment_ID() ); ?>" class="comment">
+					<footer class="comment-meta">
+						<div class="comment-author vcard">
+							<?php
+								$avatar_size = 48;
+							if ( '0' !== $comment->comment_parent ) {
+								$avatar_size = 36;
+							}
+								echo get_avatar( $comment, $avatar_size );
+							?>
+							<span class="comment-name"><?php echo wp_kses_post( get_comment_author_link() ); ?></span><br />
+							<a class="comment-time" href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+								<time pubdate="pubdate" datetime="<?php echo esc_html( get_comment_time( 'c' ) ); ?>">
+									<?php echo esc_html( get_comment_date() ); ?>, <?php echo esc_html( get_comment_time() ); ?>
+								</time>
+							</a>
+							<br />
+						</div><!-- END .comment-author .vcard -->
+					</footer>
 
-						echo get_avatar( $comment, $avatar_size );
-
-						/* translators: 1: comment author, 2: date and time */
-						printf( __( '%1$s <br/> %2$s <br/>', 'natural-lite' ),
-							sprintf( '<span class="fn">%s</span>', wp_kses_post( get_comment_author_link() ) ),
-							sprintf( '<a href="%1$s"><time pubdate datetime="%2$s">%3$s</time></a>',
-								esc_url( get_comment_link( $comment->comment_ID ) ),
-								get_comment_time( 'c' ),
-								/* translators: 1: date, 2: time */
-								sprintf( esc_html__( '%1$s', 'natural-lite' ), get_comment_date(), get_comment_time() )
+					<div class="comment-content">
+						<?php if ( '0' === $comment->comment_approved ) : ?>
+						<em class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'natural-lite' ); ?></em>
+						<br />
+					<?php endif; ?>
+						<?php comment_text(); ?>
+						<div class="reply">
+						<?php
+						comment_reply_link(
+							array_merge(
+								$args,
+								array(
+									'reply_text' => esc_html__( 'Reply', 'natural-lite' ),
+									'depth'      => $depth,
+									'max_depth'  => $args['max_depth'],
+								)
 							)
 						);
 						?>
-					</div><!-- .comment-author .vcard -->
-				</footer>
+						</div><!-- .reply -->
+						<?php edit_comment_link( esc_html__( 'Edit', 'natural-lite' ), '<span class="edit-link">', '</span>' ); ?>
+					</div>
 
-				<div class="comment-content">
-					<?php if ( $comment->comment_approved == '0' ) : ?>
-					<em class="comment-awaiting-moderation"><?php esc_html_e( 'Your comment is awaiting moderation.', 'natural-lite' ); ?></em>
-					<br />
-				<?php endif; ?>
-					<?php comment_text(); ?>
-					<div class="reply">
-					<?php comment_reply_link( array_merge( $args, array( 'reply_text' => esc_html__( 'Reply', 'natural-lite' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-					</div><!-- .reply -->
-					<?php edit_comment_link( esc_html__( 'Edit', 'natural-lite' ), '<span class="edit-link">', '</span>' ); ?>
-				</div>
+				</article><!-- #comment-## -->
 
-			</article><!-- #comment-## -->
-
-		<?php
-		break;
+				<?php
 		endswitch;
 	}
-endif; // Ends check for natural_lite_comment().
+} // Ends check for natural_lite_comment().
 
 /*
 -------------------------------------------------------------------------------------------------------
@@ -464,11 +497,11 @@ function natural_lite_excerpt( $limit ) {
 	$excerpt = explode( ' ', get_the_excerpt(), $limit );
 	if ( count( $excerpt ) >= $limit ) {
 		array_pop( $excerpt );
-		$excerpt = implode( ' ',$excerpt ).'...';
+		$excerpt = implode( ' ', $excerpt ) . '...';
 	} else {
-		$excerpt = implode( ' ',$excerpt );
+		$excerpt = implode( ' ', $excerpt );
 	}
-	$excerpt = preg_replace( '`[[^]]*]`','',$excerpt );
+	$excerpt = preg_replace( '`[[^]]*]`', '', $excerpt );
 	return $excerpt;
 }
 
@@ -476,11 +509,11 @@ function natural_lite_content( $limit ) {
 	$content = explode( ' ', get_the_content(), $limit );
 	if ( count( $content ) >= $limit ) {
 		array_pop( $content );
-		$content = implode( ' ',$content ).'...';
+		$content = implode( ' ', $content ) . '...';
 	} else {
-		$content = implode( ' ',$content );
+		$content = implode( ' ', $content );
 	}
-	$content = preg_replace( '/[.+]/','', $content );
+	$content = preg_replace( '/[.+]/', '', $content );
 	$content = apply_filters( 'the_content', $content );
 	$content = str_replace( ']]>', ']]&gt;', $content );
 	return $content;
@@ -495,14 +528,14 @@ Pagination Function
 function natural_lite_get_pagination_links() {
 	global $wp_query;
 	$big = 999999999;
-	echo paginate_links( array(
-		'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-		'format' => '?paged=%#%',
-		'current' => max( 1, get_query_var( 'paged' ) ),
+	echo wp_kses_post( paginate_links( array(
+		'base'      => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+		'format'    => '?paged=%#%',
+		'current'   => max( 1, get_query_var( 'paged' ) ),
 		'prev_text' => esc_html__( '&laquo;', 'natural-lite' ),
 		'next_text' => esc_html__( '&raquo;', 'natural-lite' ),
-		'total' => $wp_query->max_num_pages,
-	) );
+		'total'     => $wp_query->max_num_pages,
+	) ) );
 }
 
 /*
@@ -521,9 +554,9 @@ function natural_lite_wp_link_pages_args_prevnext_add( $args ) {
 	if ( ! $more ) {
 		return $args; }
 
-	if ( $page -1 ) { // There is a previous page.
-		$args['before'] .= _wp_link_page( $page -1 )
-			. $args['link_before']. $args['previouspagelink'] . $args['link_after'] . '</a>'; }
+	if ( $page - 1 ) { // There is a previous page.
+		$args['before'] .= _wp_link_page( $page - 1 )
+			. $args['link_before'] . $args['previouspagelink'] . $args['link_after'] . '</a>'; }
 
 	if ( $page < $numpages ) { // There is a next page.
 		$args['after'] = _wp_link_page( $page + 1 )
@@ -573,7 +606,7 @@ function natural_lite_body_class( $classes ) {
 		// This class will render when a background image is set
 		// regardless of whether the user has set a color as well.
 		$classes[] = 'natural-background-image';
-	} else if ( ! in_array( get_background_color(), array( '', get_theme_support( 'custom-background', 'default-color' ) ) ) ) {
+	} elseif ( ! in_array( get_background_color(), array( '', get_theme_support( 'custom-background', 'default-color' ) ), true ) ) {
 		// This class will render when a background color is set
 		// but no image is set. In the case the content text will
 		// Adjust relative to the background color.
@@ -593,8 +626,8 @@ First Featured Video
 function natural_lite_first_embed_media() {
 	global $post, $posts;
 	$first_vid = '';
-	$content = do_shortcode( apply_filters( 'the_content', $post->post_content ) );
-	$embeds = get_media_embedded_in_content( $content );
+	$content   = do_shortcode( apply_filters( 'the_content', $post->post_content ) );
+	$embeds    = get_media_embedded_in_content( $content );
 
 	if ( ! empty( $embeds ) ) {
 		foreach ( $embeds as $embed ) {
@@ -613,7 +646,7 @@ Includes
 -------------------------------------------------------------------------------------------------------
 */
 
-require_once( get_template_directory() . '/customizer/customizer.php' );
-require_once( get_template_directory() . '/includes/typefaces.php' );
-require_once( get_template_directory() . '/includes/plugin-activation.php' );
-require_once( get_template_directory() . '/includes/plugin-activation-class.php' );
+require_once get_template_directory() . '/customizer/customizer.php';
+require_once get_template_directory() . '/includes/typefaces.php';
+require_once get_template_directory() . '/includes/plugin-activation.php';
+require_once get_template_directory() . '/includes/plugin-activation-class.php';
