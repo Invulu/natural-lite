@@ -202,12 +202,12 @@ if ( ! function_exists( 'natural_lite_admin_notice_help' ) ) {
 
 	/** Function natural_lite_admin_notice_help */
 	function natural_lite_admin_notice_help() {
-		if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-help' ) ) {
+		if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-help-forever' ) ) {
 			return;
 		}
 		?>
 
-		<div data-dismissible="notice-natural-lite-help" class="notice updated is-dismissible">
+		<div data-dismissible="notice-natural-lite-help-forever" class="notice updated is-dismissible">
 
 			<p><?php printf( wp_kses_post( 'Thanks for choosing an <b>Organic Theme</b>! View our <a href="%1$s" target="_blank">Theme Documentation</a> and <a href="%2$s" target="_blank">Support Forums</a> for help getting started.', 'natural-lite' ), 'https://organicthemes.com/documentation/', 'https://organicthemes.com/forums/forum/theme-support/' ); ?></p>
 
@@ -217,9 +217,29 @@ if ( ! function_exists( 'natural_lite_admin_notice_help' ) ) {
 	}
 }
 
+if ( ! function_exists( 'natural_lite_admin_notice_blocks' ) ) {
+
+	/** Function natural_lite_admin_notice_blocks */
+	function natural_lite_admin_notice_blocks() {
+		if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-blocks-30' ) ) {
+			return;
+		}
+		?>
+
+		<div data-dismissible="notice-natural-lite-blocks-30" class="notice updated is-dismissible">
+
+			<p><?php printf( wp_kses_post( 'Introducing <b>12 New Blocks</b> for the WordPress block editor. Easily add content slideshows, testimonials, toggles, portfolios and more on any page! <a href="%1$s" target="_blank">Learn More</a> ', 'natural-lite' ), 'https://organicthemes.com/blocks/' ); ?></p>
+
+		</div>
+
+		<?php
+	}
+}
+
 add_action( 'admin_init', array( 'PAnD', 'init' ) );
-add_action( 'admin_notices', 'natural_lite_admin_notice_follow', 10 );
+// add_action( 'admin_notices', 'natural_lite_admin_notice_follow', 10 );
 add_action( 'admin_notices', 'natural_lite_admin_notice_help', 10 );
+add_action( 'admin_notices', 'natural_lite_admin_notice_blocks', 10 );
 
 require get_template_directory() . '/includes/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php';
 

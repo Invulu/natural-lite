@@ -1,6 +1,6 @@
 === Natural Lite ===
 
-Version: 1.6
+Version: 1.6.1
 Contributors: organicthemes, itsdavidmorgan
 Tags: one-column, two-columns, three-columns, right-sidebar, custom-background, custom-header, custom-menu, featured-images, featured-image-header, flexible-header, full-width-template, theme-options, translation-ready, sticky-post, footer-widgets, blog, news
 Requires at least: 4.8
@@ -237,3 +237,8 @@ CHANGELOG v1.6:
 - Updated recommended plugins
 - Added wp_body_open tag to header
 - General cleanup
+
+CHANGELOG v1.6.1:
+- Updated styles for table blocks
+- Updated styles for code blocks
+- Added dismissible admin notice for blocks

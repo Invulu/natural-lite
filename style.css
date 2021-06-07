@@ -7,8 +7,8 @@
 	Author URI: http://www.organicthemes.com
 	License: GNU General Public License v2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
-	Version: 1.6
-	Tested up to: 5.5
+	Version: 1.6.1
+	Tested up to: 5.7
 	Requires PHP: 5.3.29
 	Text Domain: natural-lite
 	Domain Path: /languages/
@@ -155,27 +155,25 @@ q:before, q:after {
 }
 code, pre, .wp-block-code {
 	color: #666666;
-	background: #f9f9f9;
-	font-family: Courier, Verdana, Tahoma, Verdana;
-	font-size: 13px;
+	background: #f4f4f4;
+	font-family: Courier, sans-serif;
 	line-height: 1.4;
 	margin: 32px 0px;
-	padding: 8px;
-	border: 1px solid #DDDDDD;
+	padding: 12px;
+	border: 2px solid rgba(0, 0, 0, 0.24);
+	box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
 	border-radius: 3px;
 }
-code {
-	display: inline;
-	white-space: normal;
-}
-pre {
+code, pre {
 	display: block;
 	white-space: pre-line;
 }
 pre code {
+	margin: 0px;
 	padding: 0px;
 	border: none;
-	border-radius: 0px;
+	box-shadow: none;
 }
 img, object, embed {
 	max-width: 100%;
@@ -2003,38 +2001,53 @@ button:hover, .button:hover, a.button:hover, .reply a:hover, #searchsubmit:hover
 *	21. Tables
 ************************************************/
 
-table {
+table,
+.wp-block-table table {
 	width: 100%;
-	margin: 18px 0px;
+	text-align: left;
+	margin: 32px 0px;
 	padding: 0px;
-	border-collapse: collapse;
+	border: 3px solid #dddddd;
+	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.08);
 	border-spacing: 0;
+	border-radius: 4px;
+}
+table p,
+table form,
+table ul,
+table li {
+	margin: 6px 0px;
+	padding: 0px;
 }
 table thead,
-table tfoot {
+table tfoot,
+.wp-block-table thead,
+.wp-block-table tfoot {
 	border: 1px solid #dddddd;
-	border: 1px solid rgba(0, 0, 0, 0.12);
 }
-table thead th,
-table tfoot td {
-	border: none;
+table tbody tr:nth-child(odd) {
+	background: rgba(0, 0, 0, 0.04);
 }
-table th {
-	background: #eeeeee;
-	background: rgba(0, 0, 0, 0.08);
-	font-size: 1.2rem;
-	text-align: center;
+table th,
+.wp-block-table th {
+	font-size: 1.1rem;
+	text-transform: uppercase;
 	margin: 0px;
-	padding: 12px 6px;
-	border: 1px solid #dddddd;
-	border: 1px solid rgba(0, 0, 0, 0.12);
+	padding: 12px;
+	border-top: 1px solid #dddddd;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
 	box-sizing: border-box;
 }
-table td {
-	padding: 12px 6px;
+table td,
+.wp-block-table td {
+	padding: 12px;
 	margin: 0px;
-	border: 1px solid #dddddd;
-	border: 1px solid rgba(0, 0, 0, 0.12);
+	border-top: 1px solid #dddddd;
+	border-left: none;
+	border-right: none;
+	border-bottom: none;
 	box-sizing: border-box;
 }
 
