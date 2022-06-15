@@ -17,8 +17,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<?php get_template_part( 'style', 'options' ); ?>
-
 <link rel="profile" href="http://gmpg.org/xfn/11">
 <link rel="pingback" href="<?php echo esc_url( bloginfo( 'pingback_url' ) ); ?>">
 

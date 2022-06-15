@@ -20,8 +20,8 @@
 			<h2 class="headline"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 
 			<div class="post-author">
-				<p class="align-left"><i class="fa fa-calendar"></i> &nbsp;<?php esc_html_e( 'Posted on', 'natural-lite' ); ?> <?php the_time( esc_html__( 'F j, Y', 'natural-lite' ) ); ?> <?php esc_html_e( 'by', 'natural-lite' ); ?> <?php esc_url( the_author_posts_link() ); ?></p>
-				<p class="align-right"><i class="fa fa-comment"></i> &nbsp;<a href="<?php the_permalink(); ?>#comments"><?php comments_number( esc_html__( 'Leave a Comment', 'natural-lite' ), esc_html__( '1 Comment', 'natural-lite' ), '% Comments' ); ?></a></p>
+				<p class="align-left"><i class="fas fa-calendar"></i> &nbsp;<?php esc_html_e( 'Posted on', 'natural-lite' ); ?> <?php the_time( esc_html__( 'F j, Y', 'natural-lite' ) ); ?> <?php esc_html_e( 'by', 'natural-lite' ); ?> <?php esc_url( the_author_posts_link() ); ?></p>
+				<p class="align-right"><i class="fas fa-comments"></i> &nbsp;<a href="<?php the_permalink(); ?>#comments"><?php comments_number( esc_html__( 'Leave a Comment', 'natural-lite' ), esc_html__( '1 Comment', 'natural-lite' ), '% Comments' ); ?></a></p>
 			</div>
 
 			<?php if ( has_post_thumbnail() ) { ?>

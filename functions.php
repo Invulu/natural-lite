@@ -28,6 +28,16 @@ if ( ! function_exists( 'natural_lite_setup' ) ) :
 		// Enable support for wide alignment class for Gutenberg blocks.
 		add_theme_support( 'align-wide' );
 
+		/*
+		* Enable support for responsive embed blocks.
+		*/
+		add_theme_support( 'responsive-embeds' );
+
+		/*
+		* Enable support for block styles.
+		*/
+		add_theme_support( 'wp-block-styles' );
+
 		// Enable selective refresh for Widgets.
 		add_theme_support( 'customize-selective-refresh-widgets' );
 
@@ -130,118 +140,28 @@ add_action( 'admin_menu', 'natural_lite_upgrade_link' );
 -------------------------------------------------------------------------------------------------------
 */
 
-/** Function natural_lite_admin_notice_follow */
-function natural_lite_admin_notice_follow() {
-	if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-follow-30' ) ) {
+/** Function natural_lite_admin_notice_discount */
+function natural_lite_admin_notice_discount() {
+	if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-discount-30' ) ) {
 		return;
 	}
 	?>
 
-	<div id="fb-root"></div>
-	<script>(function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0];
-		if (d.getElementById(id)) return;
-		js = d.createElement(s); js.id = id;
-		js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=246727095428680";
-		fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
+	<div data-dismissible="notice-natural-lite-discount-30" class="notice updated is-dismissible">
 
-	<script>window.twttr = (function(d, s, id) {
-		var js, fjs = d.getElementsByTagName(s)[0],
-		t = window.twttr || {};
-		if (d.getElementById(id)) return t;
-		js = d.createElement(s);
-		js.id = id;
-		js.src = "https://platform.twitter.com/widgets.js";
-		fjs.parentNode.insertBefore(js, fjs);
-
-		t._e = [];
-		t.ready = function(f) {
-			t._e.push(f);
-		};
-
-		return t;
-	}(document, "script", "twitter-wjs"));</script>
-
-	<div data-dismissible="notice-natural-lite-follow-30" class="notice updated is-dismissible">
-
-		<p><?php printf( __( 'Thanks for choosing the Natural Lite theme! Enter your email to receive important updates and information from <a href="%1$s" target="_blank">Organic Themes</a>.', 'natural-lite' ), 'https://organicthemes.com' ); ?></p>
-
-		<div class="follows" style="overflow: hidden; margin-bottom: 12px;">
-
-			<div id="mc_embed_signup" class="clear" style="float: left;">
-				<form style="margin:0px;" action="//organicthemes.us1.list-manage.com/subscribe/post?u=7cf6b005868eab70f031dc806&amp;id=c3cce2fac0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-					<div id="mc_embed_signup_scroll">
-						<div id="mce-responses" class="clear">
-							<div class="response" id="mce-error-response" style="display:none"></div>
-							<div class="response" id="mce-success-response" style="display:none"></div>
-						</div>
-						<div class="mc-field-group" style="float: left;">
-							<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="Email Address">
-						</div>
-						<div style="float: left; margin-left: 6px;"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-						<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_7cf6b005868eab70f031dc806_c3cce2fac0" tabindex="-1" value=""></div>
-					</div>
-				</form>
-			</div>
-
-			<div class="social-links" style="float: left; margin-left: 24px; margin-top: 4px;">
-				<div class="fb-like" style="float: left;" data-href="https://www.facebook.com/OrganicThemes/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
-				<div class="twitter-follow" style="float: left; margin-left: 6px;"><a class="twitter-follow-button" href="https://twitter.com/OrganicThemes" data-show-count="false">Follow @OrganicThemes</a></div>
-			</div>
-
-		</div>
+		<p><?php printf( wp_kses_post( '🍍 Aloha! Mahalo for using Natural Lite. We would like to extend a <b>20&#37; discount</b> towards our <a href="%1$s" target="_blank">Blocks Bundle Plugin</a> or any <a href="%2$s" target="_blank">Organic Themes Membership</a>. Just enter the coupon code "LITEUP20" during checkout.', 'natural-lite' ), 'https://organicthemes.com/blocks/', 'https://organicthemes.com/pricing/' ); ?></p>
+		<p><b><?php esc_html_e( '&mdash; David Morgan', 'natural-lite' ); ?></b><br/>
+		<b><?php printf( wp_kses_post( 'Co-founder of <a href="%1$s" target="_blank">Organic Themes</a>', 'natural-lite' ), 'https://organicthemes.com/' ); ?></b></p>
 
 	</div>
 
-	<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 	<?php
 }
 
-if ( ! function_exists( 'natural_lite_admin_notice_help' ) ) {
-
-	/** Function natural_lite_admin_notice_help */
-	function natural_lite_admin_notice_help() {
-		if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-help-forever' ) ) {
-			return;
-		}
-		?>
-
-		<div data-dismissible="notice-natural-lite-help-forever" class="notice updated is-dismissible">
-
-			<p><?php printf( wp_kses_post( 'Thanks for choosing an <b>Organic Theme</b>! View our <a href="%1$s" target="_blank">Theme Documentation</a> and <a href="%2$s" target="_blank">Support Forums</a> for help getting started.', 'natural-lite' ), 'https://organicthemes.com/documentation/', 'https://organicthemes.com/forums/forum/theme-support/' ); ?></p>
-
-		</div>
-
-		<?php
-	}
-}
-
-if ( ! function_exists( 'natural_lite_admin_notice_blocks' ) ) {
-
-	/** Function natural_lite_admin_notice_blocks */
-	function natural_lite_admin_notice_blocks() {
-		if ( ! PAnD::is_admin_notice_active( 'notice-natural-lite-blocks-30' ) ) {
-			return;
-		}
-		?>
-
-		<div data-dismissible="notice-natural-lite-blocks-30" class="notice updated is-dismissible">
-
-			<p><?php printf( wp_kses_post( 'Introducing <b>12 New Blocks</b> for the WordPress block editor. Easily add content slideshows, testimonials, toggles, portfolios and more on any page! <a href="%1$s" target="_blank">Learn More</a> ', 'natural-lite' ), 'https://organicthemes.com/blocks/' ); ?></p>
-
-		</div>
-
-		<?php
-	}
-}
-
 add_action( 'admin_init', array( 'PAnD', 'init' ) );
-// add_action( 'admin_notices', 'natural_lite_admin_notice_follow', 10 );
-add_action( 'admin_notices', 'natural_lite_admin_notice_help', 10 );
-add_action( 'admin_notices', 'natural_lite_admin_notice_blocks', 10 );
+add_action( 'admin_notices', 'natural_lite_admin_notice_discount', 10 );
 
-require get_template_directory() . '/includes/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php';
+require( get_template_directory() . '/includes/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php' );
 
 /*
 -------------------------------------------------------------------------------------------------------
@@ -293,7 +213,7 @@ if ( ! function_exists( 'natural_lite_enqueue_scripts' ) ) {
 		// Enqueue Styles.
 		wp_enqueue_style( 'natural-style', get_stylesheet_uri(), '', '1.0' );
 		wp_enqueue_style( 'natural-style-mobile', get_template_directory_uri() . '/css/style-mobile.css', array( 'natural-style' ), '1.0' );
-		wp_enqueue_style( 'font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array( 'natural-style' ), '1.0' );
+		wp_enqueue_style( 'natural-font-awesome', get_template_directory_uri() . '/css/font-awesome.css', array( 'natural-style' ), '1.0' );
 
 		// Resgister Scripts.
 		wp_register_script( 'jquery-fitvids', get_template_directory_uri() . '/js/jquery.fitvids.js', array( 'jquery' ), '1.0', true );
@@ -347,7 +267,7 @@ function natural_lite_gutenberg_styles() {
 		'all'
 	);
 	wp_enqueue_style(
-		'font-awesome',
+		'natural-font-awesome',
 		get_template_directory_uri() . '/css/font-awesome.css',
 		array( 'natural-lite-gutenberg' ),
 		'1.0'
@@ -668,5 +588,6 @@ Includes
 
 require_once get_template_directory() . '/customizer/customizer.php';
 require_once get_template_directory() . '/includes/typefaces.php';
+require_once get_template_directory() . '/includes/style-options.php';
 require_once get_template_directory() . '/includes/plugin-activation.php';
 require_once get_template_directory() . '/includes/plugin-activation-class.php';

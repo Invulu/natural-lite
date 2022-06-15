@@ -43,11 +43,6 @@ function natural_lite_register_required_plugins() {
 	 */
 	$plugins = array(
 
-		array(
-			'name'     => 'Profile Block', // The plugin name.
-			'slug'     => 'organic-profile-block', // The plugin slug (typically the folder name).
-			'required' => false, // If false, the plugin is only 'recommended' instead of required.
-		),
 		( ! ( class_exists( 'Organic_Widgets_Pro' ) || class_exists( 'Organic_Widgets' ) ) ? array(
 			'name'     => 'Organic Builder Widgets', // The plugin name.
 			'slug'     => 'organic-customizer-widgets', // The plugin slug (typically the folder name).

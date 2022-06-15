@@ -14,7 +14,18 @@
 
 	}
 
+	/* Organic Blocks Link --------------------- */
+  function obbLink () {
+    $('span.install a[href*="organic-blocks-bundle"]').click(function () {
+      window.location.href = 'https://organicthemes.com/blocks/'
+      return false
+    })
+  }
+
 	$( document )
-	.ready( modifyAdmin );
+		.ready( modifyAdmin );
+
+	$(window)
+    .on('load', obbLink)
 
 })( jQuery );
